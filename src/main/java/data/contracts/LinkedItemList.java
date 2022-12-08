@@ -46,8 +46,8 @@ public abstract class LinkedItemList<T extends Comparable<T>> implements ILinked
     /**
      * Recursively finds the right place for the new items (keeps the list sorted)
      **/
-    protected void compareAndSwap(ListItem<T> item1, ListItem<T> item2){
-        if((compare(item1, item2) >= 0)){
+    protected void compareAndSwap(ListItem<T> item1, ListItem<T> item2) {
+        if ((compare(item1, item2) >= 0)) {
             return;
         }
 
@@ -55,7 +55,7 @@ public abstract class LinkedItemList<T extends Comparable<T>> implements ILinked
         item1.setValue(item2.getValue());
         item2.setValue(tmp);
 
-        if(item2.hasNext()){
+        if (item2.hasNext()) {
             compareAndSwap(item2, item2.getNext());
         }
     }
@@ -63,13 +63,13 @@ public abstract class LinkedItemList<T extends Comparable<T>> implements ILinked
     /**
      * Finds the largest element (using the compare method with ot without custom comparator)
      **/
-    protected ListItem<T> getLargest(){
+    protected ListItem<T> getLargest() {
         var result = head;
         var prev = head;
         var cur = head;
 
-        while(cur.hasNext()){
-            if(compare(result, cur.getNext()) < 0){
+        while (cur.hasNext()) {
+            if (compare(result, cur.getNext()) < 0) {
                 prev = cur;
                 result = cur.getNext();
             }
@@ -77,7 +77,7 @@ public abstract class LinkedItemList<T extends Comparable<T>> implements ILinked
         }
 
         prev.setNext(result.getNext());
-        if(result == head){
+        if (result == head) {
             head = result.getNext();
         }
         return result;
@@ -86,16 +86,16 @@ public abstract class LinkedItemList<T extends Comparable<T>> implements ILinked
     /**
      * Increments the size variable, when new element is inserted
      **/
-    protected void increment(){
+    protected void increment() {
         size++;
     }
 
     /**
      * Decrements the size variable, when an element is popped
      **/
-    protected void decrement(){
+    protected void decrement() {
         size--;
-        if(size == 0){
+        if (size == 0) {
             head = null;
         }
     }
@@ -103,9 +103,9 @@ public abstract class LinkedItemList<T extends Comparable<T>> implements ILinked
     /**
      * Displays recursively each element's value from the list
      **/
-    private void display(ListItem<T> item){
+    private void display(ListItem<T> item) {
         item.display();
-        if(item.hasNext()){
+        if (item.hasNext()) {
             display(item.getNext());
         }
     }
@@ -114,9 +114,9 @@ public abstract class LinkedItemList<T extends Comparable<T>> implements ILinked
      * Compares two elements from the list. Uses custom comparator if set
      **/
     private int compare(ListItem<T> item1, ListItem<T> item2) {
-        if (item1 == null){
+        if (item1 == null) {
             return -1;
-        } else if(item2 == null){
+        } else if (item2 == null) {
             return 1;
         } else if (comparator != null) {
             return comparator.compare(item1.getValue(), item2.getValue());

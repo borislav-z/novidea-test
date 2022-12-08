@@ -7,8 +7,7 @@ import javax.management.OperationsException;
 
 public class Main {
 
-    public static void main(String[] args) throws OperationsException
-    {
+    public static void main(String[] args) throws OperationsException {
         testIntegers();
         testStrings();
         testIntegersReversedOrder();
@@ -17,8 +16,8 @@ public class Main {
     public static void testIntegers() throws OperationsException {
         var qPopList = new QuickPopOrderedList();
         var qPushList = new QuickPushOrderedList();
-        var data = new int[]{1,4, 2, 7};
-        for (int d:data) {
+        var data = new int[]{1, 4, 2, 7};
+        for (int d : data) {
             qPopList.push(d);
             qPushList.push(d);
         }
@@ -38,8 +37,8 @@ public class Main {
         var qPushList = new QuickPushOrderedList();
         qPushList.setComparator(new ReversedIntegerComparator());
 
-        var data = new int[]{1,4, 2, 7};
-        for (int d:data) {
+        var data = new int[]{1, 4, 2, 7};
+        for (int d : data) {
             qPopList.push(d);
             qPushList.push(d);
         }
@@ -56,8 +55,8 @@ public class Main {
     public static void testStrings() throws OperationsException {
         var qPopList = new QuickPopOrderedList();
         var qPushList = new QuickPushOrderedList();
-        var data = new String[]{"A","D", "B", "F"};
-        for (String d:data) {
+        var data = new String[]{"A", "D", "B", "F"};
+        for (String d : data) {
             qPopList.push(d);
             qPushList.push(d);
         }
@@ -79,7 +78,7 @@ public class Main {
         System.out.println("---------------------");
         System.out.println(" - Linked list popping order");
         System.out.println("---------------------");
-        while(!list.isEmpty()){
+        while (!list.isEmpty()) {
             var item = list.pop();
             item.display();
         }

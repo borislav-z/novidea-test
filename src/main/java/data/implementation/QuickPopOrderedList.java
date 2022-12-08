@@ -24,7 +24,7 @@ public class QuickPopOrderedList<T extends Comparable<T>> extends LinkedItemList
     public synchronized void push(T value) {
         var newNode = new ListItem<T>(value);
 
-        if (head != null){
+        if (head != null) {
             newNode.setNext(head);
         }
 

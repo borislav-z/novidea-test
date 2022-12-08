@@ -1,6 +1,5 @@
 package data.contracts;
 
-import javax.management.OperationsException;
 import java.util.Comparator;
 
 public interface ILinkedItemList<T extends Comparable<T>> {
@@ -21,7 +20,7 @@ public interface ILinkedItemList<T extends Comparable<T>> {
     int getSize();
 
     /**
-     *  check if there are no elements
+     * check if there are no elements
      */
     boolean isEmpty();
 
@@ -31,7 +30,7 @@ public interface ILinkedItemList<T extends Comparable<T>> {
     void setComparator(Comparator<T> comparator);
 
     /**
-     *  Displays recursively each element's value from the list
+     * Displays recursively each element's value from the list
      */
     void display();
 }
