@@ -22,17 +22,11 @@ public class QuickPushOrderedListTestTimeComplexity {
         testForNumberOfOps(10000);
     }
 
-    static void generateTestData(LinkedItemList list, int num)
+    static long populateListAndReturnTime(LinkedItemList list, int num)
     {
+        long startTime = System.nanoTime();
         for(int i= 0;i <= num;i++){
             list.push(i);
-        }
-    }
-
-    static long emptyListAndReturnTime(LinkedItemList list) {
-        long startTime = System.nanoTime();
-        while(!list.isEmpty()){
-            list.pop();
         }
         long stopTime = System.nanoTime();
         return stopTime - startTime;
@@ -42,9 +36,8 @@ public class QuickPushOrderedListTestTimeComplexity {
         System.out.println(numberOfOps + " item test");
         System.out.println("-------------");
 
-        var qPopList = new QuickPushOrderedList<Integer>();
-        generateTestData(qPopList, numberOfOps);
-        var totalTime = emptyListAndReturnTime(qPopList);
+        var qPushList = new QuickPushOrderedList<Integer>();
+        var totalTime = populateListAndReturnTime(qPushList, numberOfOps);
 
         System.out.println(" - Total time: " + totalTime);
         System.out.println(" - Avg. time per operation: " + totalTime/numberOfOps);
