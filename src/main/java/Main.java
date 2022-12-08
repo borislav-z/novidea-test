@@ -4,14 +4,13 @@ import data.implementation.QuickPushOrderedList;
 import data.implementation.ReversedIntegerComparator;
 
 import javax.management.OperationsException;
-import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) throws OperationsException
     {
-        //testIntegers();
-        //testStrings();
+        testIntegers();
+        testStrings();
         testIntegersReversedOrder();
     }
 

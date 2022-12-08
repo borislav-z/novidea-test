@@ -8,7 +8,7 @@ public class QuickPopOrderedListTestTimeComplexity
 {
 
     /**
-     * Class that is trying to measure the time it takes to pop 100, 1000, 10000 elements. For effective pop() method a
+     * Class that is trying to measure the time it takes to pop 10, 100, 1000, 10000 elements. For effective pop() method a
      * relatively stable average time per operation is needed
      */
     public static void main(String[] args) throws OperationsException
@@ -41,7 +41,7 @@ public class QuickPopOrderedListTestTimeComplexity
 
     static void testForNumberOfOps(int numberOfOps){
         System.out.println(numberOfOps + " item test");
-        System.out.println("-------------");
+        System.out.println("-----------------------------------------------------");
 
         var qPopList = new QuickPopOrderedList<Integer>();
         generateTestData(qPopList, numberOfOps);
