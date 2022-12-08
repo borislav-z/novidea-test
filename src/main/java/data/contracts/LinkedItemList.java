@@ -2,12 +2,10 @@ package data.contracts;
 
 import java.util.Comparator;
 
-public abstract class LinkedItemList<
-        T extends Comparable<T>,
-        C extends Comparator<T>> implements ILinkedItemList<T, C> {
+public abstract class LinkedItemList<T extends Comparable<T>> implements ILinkedItemList<T> {
 
     protected ListItem<T> head = null;
-    private C comparator = null;
+    private Comparator<T> comparator = null;
     private int size = 0;
 
     @Override
@@ -15,18 +13,25 @@ public abstract class LinkedItemList<
         return size;
     }
 
-    // check if there are no elements
+    /**
+     * Returns boolean result whether the list is empty
+     **/
     @Override
     public boolean isEmpty() {
         return head == null;
     }
 
+    /**
+     * Sets a custom comparator to be used in the compare method. This is used in case specific ordering is needed
+     **/
     @Override
-    public void setComparator(C comparator) {
+    public void setComparator(Comparator<T> comparator) {
         this.comparator = comparator;
     }
 
-    // recursively displays the elements of the list one by one
+    /**
+     * Displays recursively each element's value from the list
+     **/
     @Override
     public void display() {
         // check base case if there are no elements
@@ -38,7 +43,9 @@ public abstract class LinkedItemList<
         display(head);
     }
 
-    //Recursively finds the right place for the new items (keeps the list sorted)
+    /**
+     * Recursively finds the right place for the new items (keeps the list sorted)
+     **/
     protected void compareAndSwap(ListItem<T> item1, ListItem<T> item2){
         if((compare(item1, item2) >= 0)){
             return;
@@ -53,7 +60,9 @@ public abstract class LinkedItemList<
         }
     }
 
-    //Finds the largest element (using the compare method with ot without custom comparator)
+    /**
+     * Finds the largest element (using the compare method with ot without custom comparator)
+     **/
     protected ListItem<T> getLargest(){
         var result = head;
         var prev = head;
@@ -74,10 +83,16 @@ public abstract class LinkedItemList<
         return result;
     }
 
+    /**
+     * Increments the size variable, when new element is inserted
+     **/
     protected void increment(){
         size++;
     }
 
+    /**
+     * Decrements the size variable, when an element is popped
+     **/
     protected void decrement(){
         size--;
         if(size == 0){
@@ -85,6 +100,9 @@ public abstract class LinkedItemList<
         }
     }
 
+    /**
+     * Displays recursively each element's value from the list
+     **/
     private void display(ListItem<T> item){
         item.display();
         if(item.hasNext()){
@@ -92,12 +110,15 @@ public abstract class LinkedItemList<
         }
     }
 
+    /**
+     * Compares two elements from the list. Uses custom comparator if set
+     **/
     private int compare(ListItem<T> item1, ListItem<T> item2) {
-        if(item1 == null){
+        if (item1 == null){
             return -1;
         } else if(item2 == null){
             return 1;
-        }else if (comparator != null) {
+        } else if (comparator != null) {
             return comparator.compare(item1.getValue(), item2.getValue());
         } else {
             return item1.getValue().compareTo(item2.getValue());

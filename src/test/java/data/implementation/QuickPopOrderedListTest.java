@@ -1,16 +1,17 @@
 package data.implementation;
 
-import javax.management.OperationsException;
+import data.exceptions.EmptyListException;
+import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class QuickPopOrderedListTest
-{
-    @org.junit.jupiter.api.Test
-    void popTestShouldBeValidInt() throws OperationsException
-    {
-        var qPopList = new QuickPopOrderedList();
+class QuickPopOrderedListTest {
+
+    @Test
+    void testPopIntegers_PopulatedList_ShouldReturnThemInDescendingOrder() {
+        var qPopList = new QuickPopOrderedList<Integer>();
 
         qPopList.push(1);
         qPopList.push(7);
@@ -21,10 +22,9 @@ class QuickPopOrderedListTest
         assertEquals(1, qPopList.pop().getValue());
     }
 
-    @org.junit.jupiter.api.Test
-    void popTestShouldBeValidString() throws OperationsException
-    {
-        var qPopList = new QuickPopOrderedList();
+    @Test
+    void testPopIntegers_PopulatedList_ShouldReturnStringsInDescendingOrder() {
+        var qPopList = new QuickPopOrderedList<String>();
 
         qPopList.push("A");
         qPopList.push("C");
@@ -35,20 +35,17 @@ class QuickPopOrderedListTest
         assertEquals("A", qPopList.pop().getValue());
     }
 
-    @org.junit.jupiter.api.Test
-    void popTestShouldFailWithException() throws OperationsException
-    {
-        var qPopList = new QuickPopOrderedList();
-        // It should fail and throw exception with text "List is empty"
-        assertThrows(OperationsException.class, () ->{qPopList.pop();});
+    @Test
+    void testPopStrings_EmptyList_ShouldFailWithEmptyListException() {
+        var qPopList = new QuickPopOrderedList<String>();
+        assertThatThrownBy(qPopList::pop)
+                .isInstanceOf(EmptyListException.class);
     }
 
     //Ensure we have the expected size of the data structure
-    @org.junit.jupiter.api.Test
-    void pushTestShouldBeValidSizeInt()
-    {
-        // Test if the LinkedList push element actually push elements in the data structure by size
-        var qPopList = new QuickPopOrderedList();
+    @Test
+    void testPushIntegers_PopulatedList_ShouldReturnValidSize() {
+        var qPopList = new QuickPopOrderedList<Integer>();
 
         qPopList.push(1);
         qPopList.push(2);
@@ -57,10 +54,9 @@ class QuickPopOrderedListTest
         assertEquals(3, qPopList.getSize());
     }
 
-    @org.junit.jupiter.api.Test
-    void pushTestShouldBeValidInt() throws OperationsException
-    {
-        var qPopList = new QuickPopOrderedList();
+    @Test
+    void testPushStrings_PopulatedList_ShouldReturnStringsInDescendingOrder() {
+        var qPopList = new QuickPopOrderedList<String>();
 
         qPopList.push("A");
         qPopList.push("C");
@@ -69,24 +65,21 @@ class QuickPopOrderedListTest
         assertEquals("C", qPopList.pop().getValue());
         assertEquals("B", qPopList.pop().getValue());
         assertEquals("A", qPopList.pop().getValue());
-
     }
 
-    @org.junit.jupiter.api.Test
-    void getSizeTest()
-    {
-        var qPopList = new QuickPopOrderedList();
+    @Test
+    void testPushIntegers_PopulatedList_ShouldReturnTheExactNumberOfPushedObjects() {
+        var qPopList = new QuickPopOrderedList<Integer>();
         // Compare the size of the expected size and the actual size of the data structure
-        for(int i = 0;i < 200;i++)
-        {
+        for (int i = 0; i < 200; i++) {
             qPopList.push(i);
         }
         assertEquals(200, qPopList.getSize());
     }
 
-    @org.junit.jupiter.api.Test
-    void isEmptyTest(){
-        var qPopList = new QuickPopOrderedList();
-        assertEquals(true,  qPopList.isEmpty());
+    @Test
+    void testIsEmptyListStrings_EmptyList_ShouldReturnTrue() {
+        var qPopList = new QuickPopOrderedList<String>();
+        assertTrue(qPopList.isEmpty());
     }
 }

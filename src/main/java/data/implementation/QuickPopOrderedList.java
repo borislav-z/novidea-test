@@ -2,15 +2,14 @@ package data.implementation;
 
 import data.contracts.LinkedItemList;
 import data.contracts.ListItem;
+import data.exceptions.EmptyListException;
 
-import javax.management.OperationsException;
-import java.util.Comparator;
+public class QuickPopOrderedList<T extends Comparable<T>> extends LinkedItemList<T> {
 
-public class QuickPopOrderedList<T extends Comparable<T>, C extends Comparator<T>> extends LinkedItemList<T, C> {
     @Override
-    public ListItem<T> pop() throws OperationsException {
+    public ListItem<T> pop() {
         if (isEmpty()) {
-            throw new OperationsException("List is empty.");
+            throw new EmptyListException();
         }
 
         var result = head;
@@ -22,13 +21,13 @@ public class QuickPopOrderedList<T extends Comparable<T>, C extends Comparator<T
     }
 
     @Override
-    public void push(T value) {
-        var newNode = new ListItem<T>();
-        newNode.setValue(value);
+    public synchronized void push(T value) {
+        var newNode = new ListItem<T>(value);
 
-        if(head != null){
+        if (head != null){
             newNode.setNext(head);
         }
+
         head = newNode;
         compareAndSwap(head, head.getNext());
 

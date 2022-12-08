@@ -37,7 +37,7 @@ public class Main {
         var qPopList = new QuickPopOrderedList();
         qPopList.setComparator(new ReversedIntegerComparator());
         var qPushList = new QuickPushOrderedList();
-        qPopList.setComparator(new ReversedIntegerComparator());
+        qPushList.setComparator(new ReversedIntegerComparator());
 
         var data = new int[]{1,4, 2, 7};
         for (int d:data) {

@@ -3,25 +3,35 @@ package data.contracts;
 import javax.management.OperationsException;
 import java.util.Comparator;
 
-public interface ILinkedItemList<
-        T extends Comparable<T>,
-        C extends Comparator<T>> {
+public interface ILinkedItemList<T extends Comparable<T>> {
 
-    //Returns the last element of the list
-    ListItem<T> pop() throws OperationsException;
+    /**
+     * Returns the last element of the list
+     */
+    ListItem<T> pop();
 
-    //Insert an element in the list
+    /**
+     * Insert an element in the list
+     */
     void push(T value);
 
-    //Returns the size of the list
+    /**
+     * Returns the size of the list
+     */
     int getSize();
 
-    // check if there are no elements
+    /**
+     *  check if there are no elements
+     */
     boolean isEmpty();
 
-    //Set custom comparator if necessary
-    void setComparator(C comparator);
+    /**
+     * Set custom comparator if necessary
+     */
+    void setComparator(Comparator<T> comparator);
 
-    // simple print for testing purposes
+    /**
+     *  Displays recursively each element's value from the list
+     */
     void display();
 }

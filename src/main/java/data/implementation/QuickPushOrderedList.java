@@ -2,15 +2,13 @@ package data.implementation;
 
 import data.contracts.LinkedItemList;
 import data.contracts.ListItem;
+import data.exceptions.EmptyListException;
 
-import javax.management.OperationsException;
-import java.util.Comparator;
-
-public class QuickPushOrderedList<T extends Comparable<T>, C extends Comparator<T>> extends LinkedItemList<T,C> {
+public class QuickPushOrderedList<T extends Comparable<T>> extends LinkedItemList<T> {
     @Override
-    public ListItem<T> pop() throws OperationsException {
+    public ListItem<T> pop() {
         if (isEmpty()) {
-            throw new OperationsException("List is empty.");
+            throw new EmptyListException();
         }
 
         var result = getLargest();
