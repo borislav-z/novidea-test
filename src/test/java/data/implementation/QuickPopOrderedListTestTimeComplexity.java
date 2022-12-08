@@ -17,10 +17,10 @@ public class QuickPopOrderedListTestTimeComplexity
     }
     static void popTestTimeComplexity() throws OperationsException
     {
-        testForNumberOfOps(10);
-        testForNumberOfOps(100);
-        testForNumberOfOps(1000);
         testForNumberOfOps(10000);
+        testForNumberOfOps(1000);
+        testForNumberOfOps(100);
+        testForNumberOfOps(10);
     }
 
    static void generateTestData(LinkedItemList list, int num)
@@ -46,9 +46,10 @@ public class QuickPopOrderedListTestTimeComplexity
         var qPopList = new QuickPopOrderedList<Integer>();
         generateTestData(qPopList, numberOfOps);
         var totalTime = emptyListAndReturnTime(qPopList);
+        float avg = totalTime/numberOfOps;
 
         System.out.println(" - Total time: " + totalTime);
-        System.out.println(" - Avg. time per operation: " + totalTime/numberOfOps);
+        System.out.println(" - Avg. time per operation: " + avg);
         System.out.println("-----------------------------------------------------");
     }
 }
