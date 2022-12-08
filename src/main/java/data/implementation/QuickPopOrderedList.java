@@ -7,7 +7,7 @@ import data.exceptions.EmptyListException;
 public class QuickPopOrderedList<T extends Comparable<T>> extends LinkedItemList<T> {
 
     @Override
-    public ListItem<T> pop() {
+    public synchronized ListItem<T> pop() {
         if (isEmpty()) {
             throw new EmptyListException();
         }

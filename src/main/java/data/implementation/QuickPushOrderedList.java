@@ -6,7 +6,7 @@ import data.exceptions.EmptyListException;
 
 public class QuickPushOrderedList<T extends Comparable<T>> extends LinkedItemList<T> {
     @Override
-    public ListItem<T> pop() {
+    public synchronized ListItem<T> pop() {
         if (isEmpty()) {
             throw new EmptyListException();
         }
@@ -18,7 +18,7 @@ public class QuickPushOrderedList<T extends Comparable<T>> extends LinkedItemLis
     }
 
     @Override
-    public void push(T value) {
+    public synchronized void push(T value) {
         var newNode = new ListItem<T>();
         newNode.setValue(value);
 
