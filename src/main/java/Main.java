@@ -1,45 +1,89 @@
-import custom.data.structure.QuickPopOrderedList;
-import custom.data.structure.QuickPushOrderedList;
+import data.contracts.ILinkedItemList;
+import data.implementation.QuickPopOrderedList;
+import data.implementation.QuickPushOrderedList;
+import data.implementation.ReversedIntegerComparator;
 
 import javax.management.OperationsException;
 import java.util.Random;
-
-/**
- * @author ${Lyubomir Tsvetkov}
- *
- *
- */
 
 public class Main {
 
     public static void main(String[] args) throws OperationsException
     {
-        QuickPopOrderedList numListPop = new QuickPopOrderedList();
-        QuickPushOrderedList numListPush = new QuickPushOrderedList();
+        //testIntegers();
+        //testStrings();
+        testIntegersReversedOrder();
+    }
 
-//        numListPop.push(1);
-//        numListPop.push(4);
-//        numListPop.push(2);
-//        numListPop.push(7);
-//        numListPop.pop();
-//        numListPop.print();
-
-//-----------------------------------------------------------------------------------------------
-//        numListPush.push(1);
-//        numListPush.push(4);
-//        numListPush.push(2);
-//        numListPush.pop();
-//        numListPush.print();
-
-
-
-        Random random = new Random();
-        for(int i= 0;i <= 10000;i++){
-            int randomIntCap = random.nextInt(1000);
-            numListPop.push(randomIntCap);
+    public static void testIntegers() throws OperationsException {
+        var qPopList = new QuickPopOrderedList();
+        var qPushList = new QuickPushOrderedList();
+        var data = new int[]{1,4, 2, 7};
+        for (int d:data) {
+            qPopList.push(d);
+            qPushList.push(d);
         }
+        System.out.println("---------------------");
+        System.out.println("Quick Pop String List");
+        System.out.println("---------------------");
+        printList(qPopList);
 
+        System.out.println("Quick Push String List");
+        System.out.println("---------------------");
+        printList(qPushList);
+    }
 
+    public static void testIntegersReversedOrder() throws OperationsException {
+        var qPopList = new QuickPopOrderedList();
+        qPopList.setComparator(new ReversedIntegerComparator());
+        var qPushList = new QuickPushOrderedList();
+        qPopList.setComparator(new ReversedIntegerComparator());
+
+        var data = new int[]{1,4, 2, 7};
+        for (int d:data) {
+            qPopList.push(d);
+            qPushList.push(d);
+        }
+        System.out.println("---------------------");
+        System.out.println("Quick Pop Reverse Integer List");
+        System.out.println("---------------------");
+        printList(qPopList);
+
+        System.out.println("Quick Push Reversed Integer List");
+        System.out.println("---------------------");
+        printList(qPushList);
+    }
+
+    public static void testStrings() throws OperationsException {
+        var qPopList = new QuickPopOrderedList();
+        var qPushList = new QuickPushOrderedList();
+        var data = new String[]{"A","D", "B", "F"};
+        for (String d:data) {
+            qPopList.push(d);
+            qPushList.push(d);
+        }
+        System.out.println("---------------------");
+        System.out.println("Quick Pop String List");
+        System.out.println("---------------------");
+        printList(qPopList);
+
+        System.out.println("Quick Push String List");
+        System.out.println("---------------------");
+        printList(qPushList);
+    }
+
+    private static void printList(ILinkedItemList list) throws OperationsException {
+        System.out.println(" - Linked list inner order");
+        System.out.println("---------------------");
+        list.display();
+
+        System.out.println("---------------------");
+        System.out.println(" - Linked list popping order");
+        System.out.println("---------------------");
+        while(!list.isEmpty()){
+            var item = list.pop();
+            item.display();
+        }
     }
 }
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="data.implementation.QuickPopOrderedListTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-12-08T12:01:31" hostname="LENOVO-B" time="10.718">
+  <properties/>
+  <testcase name="isEmptyTest()" classname="data.implementation.QuickPopOrderedListTest" time="10.718"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
