@@ -2,6 +2,8 @@ import data.contracts.ILinkedItemList;
 import data.implementation.QuickPopOrderedList;
 import data.implementation.QuickPushOrderedList;
 import data.implementation.ReversedIntegerComparator;
+import extra.models.Employee;
+import extra.models.PaidEmployee;
 
 import javax.management.OperationsException;
 
@@ -11,6 +13,56 @@ public class Main {
         testIntegers();
         testStrings();
         testIntegersReversedOrder();
+        testEmployees();
+        testPaidEmployees();
+    }
+
+    public static void testEmployees() throws OperationsException {
+        var qPopList = new QuickPopOrderedList();
+        var qPushList = new QuickPushOrderedList();
+        var data = new Employee[]{
+                new Employee(1, "Ann"),
+                new Employee(2, "George"),
+                new Employee(3, "Daniel"),
+                new Employee(4, "Carla"),
+                new Employee(5, null)
+        };
+        for (Employee d : data) {
+            qPopList.push(d);
+            qPushList.push(d);
+        }
+        System.out.println("---------------------");
+        System.out.println("Quick Pop Employee List");
+        System.out.println("---------------------");
+        printList(qPopList);
+
+        System.out.println("Quick Push Employee List");
+        System.out.println("---------------------");
+        printList(qPushList);
+    }
+
+    public static void testPaidEmployees() throws OperationsException {
+        var qPopList = new QuickPopOrderedList();
+        var qPushList = new QuickPushOrderedList();
+        var data = new PaidEmployee[]{
+                new PaidEmployee(1, "Ann", 1500),
+                new PaidEmployee(2, "George", 1000),
+                new PaidEmployee(3, "Daniel", 1200),
+                new PaidEmployee(4, "Carla", 2000),
+                new PaidEmployee(5, null, 0)
+        };
+        for (PaidEmployee d : data) {
+            qPopList.push(d);
+            qPushList.push(d);
+        }
+        System.out.println("---------------------");
+        System.out.println("Quick Pop Paid Employee List");
+        System.out.println("---------------------");
+        printList(qPopList);
+
+        System.out.println("Quick Push Paid Employee List");
+        System.out.println("---------------------");
+        printList(qPushList);
     }
 
     public static void testIntegers() throws OperationsException {
