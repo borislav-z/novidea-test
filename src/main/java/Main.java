@@ -10,11 +10,11 @@ import javax.management.OperationsException;
 public class Main {
 
     public static void main(String[] args) {
-        /*testIntegers();
+        testIntegers();
         testStrings();
         testIntegersReversedOrder();
         testEmployees();
-        testPaidEmployees();*/
+        testPaidEmployees();
 
         testThreadSafeQuickPop();
         testThreadSafeQuickPush();

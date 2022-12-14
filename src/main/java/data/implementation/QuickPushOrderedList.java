@@ -5,7 +5,7 @@ import data.contracts.ListItem;
 import data.exceptions.EmptyListException;
 
 public class QuickPushOrderedList<T extends Comparable<T>> extends LinkedItemList<T> {
-    Object syncObj = new Object();
+    final Object syncObj = new Object();
 
     @Override
     public ListItem<T> pop() {

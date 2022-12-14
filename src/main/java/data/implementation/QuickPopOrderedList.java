@@ -5,16 +5,16 @@ import data.contracts.ListItem;
 import data.exceptions.EmptyListException;
 
 public class QuickPopOrderedList<T extends Comparable<T>> extends LinkedItemList<T> {
-    Object syncObj = new Object();
+    final Object syncObj = new Object();
 
     @Override
     public ListItem<T> pop() {
-        if (isEmpty()) {
-            throw new EmptyListException();
-        }
         ListItem<T> result;
 
         synchronized (syncObj) {
+            if (isEmpty()) {
+                throw new EmptyListException();
+            }
             result = head;
             head = head.getNext();
             result.detach();
