@@ -5,26 +5,33 @@ import data.contracts.ListItem;
 import data.exceptions.EmptyListException;
 
 public class QuickPushOrderedList<T extends Comparable<T>> extends LinkedItemList<T> {
+    Object syncObj = new Object();
+
     @Override
-    public synchronized ListItem<T> pop() {
+    public ListItem<T> pop() {
         if (isEmpty()) {
             throw new EmptyListException();
         }
 
-        var result = getLargest();
-        result.detach();
-        decrement();
+        ListItem<T> result;
+        synchronized (syncObj) {
+            result = getLargest();
+            result.detach();
+            decrement();
+        }
         return result;
     }
 
     @Override
-    public synchronized void push(T value) {
+    public void push(T value) {
         var newNode = new ListItem<T>();
         newNode.setValue(value);
 
-        newNode.setNext(head);
-        head = newNode;
+        synchronized (syncObj) {
+            newNode.setNext(head);
+            head = newNode;
 
-        increment();
+            increment();
+        }
     }
 }

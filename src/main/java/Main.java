@@ -9,15 +9,70 @@ import javax.management.OperationsException;
 
 public class Main {
 
-    public static void main(String[] args) throws OperationsException {
-        testIntegers();
+    public static void main(String[] args) {
+        /*testIntegers();
         testStrings();
         testIntegersReversedOrder();
         testEmployees();
-        testPaidEmployees();
+        testPaidEmployees();*/
+
+        testThreadSafeQuickPop();
+        testThreadSafeQuickPush();
     }
 
-    public static void testEmployees() throws OperationsException {
+    public static void testThreadSafeQuickPop() {
+        var qPopList = new QuickPopOrderedList<Integer>();
+
+        for (int x = 1; x < 60; x++) {
+            new Thread(() -> {
+                var rand = generate(1, 1000);
+                qPopList.push(rand);
+                System.out.printf("The output of the push thread is : %s - %d%n", Thread.currentThread().getName(), rand);
+            }).start();
+
+            if(x % 2 == 0) {
+                new Thread(() -> {
+                    var result = qPopList.pop();
+                    System.out.printf("The output of the pop thread is : %s - %d%n", Thread.currentThread().getName(), result.getValue());
+                }).start();
+            }
+        }
+
+        System.out.println("---------------------");
+        System.out.println("Quick Pop Integer List");
+        System.out.println("---------------------");
+        printList(qPopList);
+    }
+
+    public static void testThreadSafeQuickPush() {
+        var qPushList = new QuickPushOrderedList<Integer>();
+
+        for (int x = 1; x < 60; x++) {
+            new Thread(() -> {
+                var rand = generate(1, 1000);
+                qPushList.push(rand);
+                System.out.printf("The output of the push thread is : %s - %d%n", Thread.currentThread().getName(), rand);
+            }).start();
+
+            if(x % 2 == 0) {
+                new Thread(() -> {
+                    var result = qPushList.pop();
+                    System.out.printf("The output of the pop thread is : %s - %d%n", Thread.currentThread().getName(), result.getValue());
+                }).start();
+            }
+        }
+
+        System.out.println("---------------------");
+        System.out.println("Quick Push Integer List");
+        System.out.println("---------------------");
+        printList(qPushList);
+    }
+
+    private static int generate(int min, int max) {
+        return min + (int)(Math.random() * ((max - min) + 1));
+    }
+
+    public static void testEmployees() {
         var qPopList = new QuickPopOrderedList();
         var qPushList = new QuickPushOrderedList();
         var data = new Employee[]{
@@ -41,7 +96,7 @@ public class Main {
         printList(qPushList);
     }
 
-    public static void testPaidEmployees() throws OperationsException {
+    public static void testPaidEmployees() {
         var qPopList = new QuickPopOrderedList();
         var qPushList = new QuickPushOrderedList();
         var data = new PaidEmployee[]{
@@ -65,7 +120,7 @@ public class Main {
         printList(qPushList);
     }
 
-    public static void testIntegers() throws OperationsException {
+    public static void testIntegers() {
         var qPopList = new QuickPopOrderedList();
         var qPushList = new QuickPushOrderedList();
         var data = new int[]{1, 4, 2, 7};
@@ -74,16 +129,16 @@ public class Main {
             qPushList.push(d);
         }
         System.out.println("---------------------");
-        System.out.println("Quick Pop String List");
+        System.out.println("Quick Pop Integer List");
         System.out.println("---------------------");
         printList(qPopList);
 
-        System.out.println("Quick Push String List");
+        System.out.println("Quick Push Integer List");
         System.out.println("---------------------");
         printList(qPushList);
     }
 
-    public static void testIntegersReversedOrder() throws OperationsException {
+    public static void testIntegersReversedOrder() {
         var qPopList = new QuickPopOrderedList();
         qPopList.setComparator(new ReversedIntegerComparator());
         var qPushList = new QuickPushOrderedList();
@@ -95,7 +150,7 @@ public class Main {
             qPushList.push(d);
         }
         System.out.println("---------------------");
-        System.out.println("Quick Pop Reverse Integer List");
+        System.out.println("Quick Pop Reversed Integer List");
         System.out.println("---------------------");
         printList(qPopList);
 
@@ -104,7 +159,7 @@ public class Main {
         printList(qPushList);
     }
 
-    public static void testStrings() throws OperationsException {
+    public static void testStrings() {
         var qPopList = new QuickPopOrderedList();
         var qPushList = new QuickPushOrderedList();
         var data = new String[]{"A", "D", "B", "F"};
@@ -122,7 +177,7 @@ public class Main {
         printList(qPushList);
     }
 
-    private static void printList(ILinkedItemList list) throws OperationsException {
+    private static void printList(ILinkedItemList list) {
         System.out.println(" - Linked list inner order");
         System.out.println("---------------------");
         list.display();
